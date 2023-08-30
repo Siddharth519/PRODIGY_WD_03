@@ -1,0 +1,207 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cell {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+    overflow: hidden;
+}
+
+.cell[data-cell="X"] {
+    color: #ff0000;
+}
+
+.cell[data-cell="O"] {
+    color: #0000ff;
+}
+
+.cell[data-cell="X"]::before,
+.cell[data-cell="O"]::before {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+    z-index: -1;
+}
+
+.cell[data-cell="X"]::before {
+    background-image: url('x.png'); /* Replace with your X marker image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 1;
+}
+
+.cell[data-cell="O"]::before {
+    background-image: url('o.png'); /* Replace with your O marker image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+}
+
+.cell:hover {
+    background-color: #f0f0f0;
+}
+
+.cell:hover::before {
+    opacity: 0.5;
+}
+
+.cell.clicked {
+    animation: scaleUp 0.2s ease-in-out;
+}
+
+.player-names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.player-names label {
+    margin: 5px;
+}
+
+.player-names input[type="text"] {
+    width: 180px;
+    padding: 8px;
+    border: 2px solid #333;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.player-names input[type="text"]:focus {
+    border-color: #00aa00;
+    transform: scale(1.02);
+}
+
+/* Style the player name textboxes */
+.player-names input[type="text"] {
+    width: 180px;
+    padding: 8px;
+    border: 2px solid #333;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+/* Add animation when user interacts with the textboxes */
+.player-names input[type="text"]:focus {
+    border-color: #00aa00;
+    transform: scale(1.02);
+}
+
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.game-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.game-mode label {
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.game-mode input[type="radio"] {
+    margin-right: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.game-mode input[type="radio"]:checked {
+    border-color: #00aa00;
+}
+
+.game-mode input[type="radio"]:checked::before {
+    content: '\2714'; /* Unicode checkmark symbol */
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    background-color: #00aa00;
+    color: white;
+    border-radius: 50%;
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.alert {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.cell.winning {
+    background-color: #aaffaa;
+    transition: background-color 0.3s;
+}
